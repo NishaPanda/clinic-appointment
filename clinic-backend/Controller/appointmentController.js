@@ -16,13 +16,11 @@ exports.getDoctors = async (req, res) => {
 exports.bookAppointment = async (req, res) => {
   try {
     const doctorId = req.params.doctorId;
-    const { patientId, patientName, patientEmail, date, time, reason } = req.body;
+    const { patientName, patientEmail, date, time, reason } = req.body;
 
     // Validate input
-    if (!patientId || !patientName || !patientEmail || !doctorId || !date || !time) {
-
+    if (!req.user?.id || !patientName || !patientEmail || !doctorId || !date || !time) {
       return res.status(400).json({ message: "All fields are required" });
-      console.log(patientId, patientName, patientEmail, doctorId, date, time);
     }
 
     // Find doctor
@@ -33,8 +31,9 @@ exports.bookAppointment = async (req, res) => {
 
     const appointment = new Appointment({
       doctor: doctorId,
+      doctorId: doctorId,
       doctorName: doctor.name,
-      patient: patientId,
+      patient: req.user.id,
       patientName,
       patientEmail,
       date,
@@ -44,6 +43,14 @@ exports.bookAppointment = async (req, res) => {
     });
 
     await appointment.save();
+    // Save reference on user document for quick lookup
+    try {
+      await User.findByIdAndUpdate(req.user.id, { $push: { appointments: appointment._id } });
+    } catch (uErr) {
+      console.error('Failed to update user appointments', uErr);
+    }
+
+    // Return the saved appointment
     res.status(201).json({ message: "Appointment booked successfully", appointment });
 
   } catch (err) {
@@ -62,5 +69,69 @@ exports.getMyAppointments = async (req, res) => {
     res.status(200).json(appointments);
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
+  }
+};
+
+// Get appointment by id (ensure patient is owner or allow doctors/admins as needed)
+exports.getAppointmentById = async (req, res) => {
+  try {
+    const apptId = req.params.id;
+    const appointment = await Appointment.findById(apptId).lean();
+    if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+
+    // Optional: enforce ownership
+    if (req.user && String(appointment.patient) !== String(req.user.id) && req.user.role !== 'doctor') {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    res.status(200).json(appointment);
+  } catch (err) {
+    console.error('getAppointmentById error', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+// Get appointments for doctor (logged-in doctor)
+exports.getAppointmentsForDoctor = async (req, res) => {
+  try {
+    const doctorId = req.user.id;
+    const appointments = await Appointment.find({ doctor: doctorId })
+      .sort({ date: 1 })
+      .lean();
+    res.status(200).json(appointments);
+  } catch (err) {
+    console.error('getAppointmentsForDoctor error', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+// Cancel appointment (patient or doctor can cancel)
+exports.cancelAppointment = async (req, res) => {
+  try {
+    const apptId = req.params.id;
+    const appointment = await Appointment.findById(apptId);
+    if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+
+    // Debug logging to diagnose cancel issues
+    console.log('Cancel attempt:', { apptId, appointmentPatient: String(appointment.patient), appointmentDoctor: String(appointment.doctor), reqUser: req.user });
+
+    if (appointment.status === 'cancelled') {
+      return res.status(400).json({ message: 'Appointment already cancelled' });
+    }
+
+    const userId = req.user?.id;
+    const userRole = req.user?.role;
+    // Allow patient owner or the doctor to cancel
+    if (String(appointment.patient) !== String(userId) && String(appointment.doctor) !== String(userId) && userRole !== 'admin') {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    appointment.status = 'cancelled';
+    await appointment.save();
+
+    res.status(200).json({ message: 'Appointment cancelled', appointment });
+  } catch (err) {
+    console.error('cancelAppointment error', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
   }
 };

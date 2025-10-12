@@ -1,17 +1,29 @@
 // routes/doctorRoutes.js
 const express = require("express");
 const router = express.Router();
-const {getDoctors,bookDoctor} = require("../Controller/doctController");
-const {getMyAppointments,bookAppointment} = require("../Controller/appointmentController");
-// const authMiddleware = require("../middleware/authMiddleware"); // ensures req.user exists
+const { getMyAppointments, bookAppointment, getDoctors, getAppointmentById, getAppointmentsForDoctor, cancelAppointment } = require("../Controller/appointmentController");
+const authMiddleware = require("../Middelware/authMiddleware"); // ensures req.user exists
 
 // Get all doctors
 router.get("/doctors", getDoctors);
 
+// Get appointments for logged-in patient (root) - matches frontend fetchAppointments()
+router.get("/", authMiddleware, getMyAppointments);
+
 // Book appointment (patient must be logged in)
-router.post("/doctors/book/:doctorId", bookAppointment);
+router.post("/doctors/book/:doctorId", authMiddleware, bookAppointment);
 
 // Get my appointments (patient)
-router.get("/appointments/me", getMyAppointments);
+router.get("/appointments/me", authMiddleware, getMyAppointments);
+
+// Get appointment by id
+// Get appointments for logged-in doctor
+router.get("/doctor/list", authMiddleware, getAppointmentsForDoctor);
+
+// Cancel appointment (DELETE)
+router.delete("/:id", authMiddleware, cancelAppointment);
+
+// Get appointment by id (param route should be last to avoid shadowing other routes)
+router.get("/:id", authMiddleware, getAppointmentById);
 
 module.exports = router;

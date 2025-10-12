@@ -21,6 +21,8 @@ const userSchema = new mongoose.Schema({
     type: Number },             // optional for patients
   gender: { 
     type: String }           // optional for patients
+  ,
+  appointments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Appointment' }]
 }, { timestamps: true });
 
 

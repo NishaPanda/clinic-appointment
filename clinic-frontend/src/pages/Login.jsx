@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE } from '../config';
 import "./Login.css";
 
 export default function Login() {
@@ -16,7 +17,7 @@ export default function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/auth/login",
+        `${API_BASE}/auth/login`,
         { email, password },
         { headers: { "Content-Type": "application/json" } }
       );

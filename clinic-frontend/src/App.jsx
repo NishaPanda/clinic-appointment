@@ -10,6 +10,7 @@ import MyAppointments from './components/MyAppointments';
 import Receipt from './components/Receipt';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Profile from './pages/Profile';
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/book/:doctorId?" element={<BookingForm />} />
           <Route path="/appointments" element={<MyAppointments />} />
           <Route path="/receipt/:id" element={<Receipt />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register />} />
         </Routes>

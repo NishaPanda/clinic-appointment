@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE } from '../config';
 import './doctor.css';
 
 export default function DoctorList() {
@@ -11,7 +12,7 @@ export default function DoctorList() {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/doctors');
+          const response = await axios.get(`${API_BASE}/doctors`);
         setDoctors(response.data); // set the fetched doctors
       } catch (err) {
         alert('Error: ' + (err.response?.data?.message || err.message));
@@ -33,7 +34,7 @@ export default function DoctorList() {
           <div className="doctor-info">
             <div>
               <div className="doctor-name">{d.name}</div>
-              <div className="doctor-specialty">{d.specialty}</div>
+              <div className="doctor-specialty">{d.specialization || d.specialty}</div>
             </div>
             <div>
               {/* Navigate to Booking Page */}

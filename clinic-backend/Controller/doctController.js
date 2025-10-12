@@ -26,10 +26,18 @@ exports.bookDoctor = async (req, res) => {
     // Create appointment
     const appointment = new Appointment({
       doctor: doctorId,
+      doctorId: doctorId,
       patient: patientId,
     });
 
     await appointment.save();
+
+    // Link appointment to patient document
+    try {
+      await User.findByIdAndUpdate(patientId, { $push: { appointments: appointment._id } });
+    } catch (uErr) {
+      console.error('Failed to update patient appointments', uErr);
+    }
 
     res.status(201).json({ message: "Appointment booked successfully", appointment });
   } catch (err) {

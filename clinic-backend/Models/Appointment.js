@@ -9,7 +9,7 @@ const appointmentSchema = new mongoose.Schema(
     doctorId: { type: mongoose.Schema.Types.ObjectId, required: true }, // optional duplicate for easier querying
     date: { type: Date, required: true },
     time: { type: String }, // store time as string for simplicity
-    status: { type: String, enum: ["pending", "confirmed", "completed"], default: "pending" },
+  status: { type: String, enum: ["pending", "confirmed", "completed", "cancelled"], default: "pending" },
   },
   { timestamps: true }
 );

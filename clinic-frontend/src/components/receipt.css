@@ -70,3 +70,15 @@
     width: 100%;
   }
 }
+
+/* Print styles */
+@media print {
+  /* Hide everything except printable receipts */
+  body * { visibility: hidden; }
+  .printable, .printable * { visibility: visible; }
+  .printable { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; }
+  /* Make text darker on paper */
+  .printable { background: #fff; color: #000; }
+  .receipt-card { box-shadow: none; border-radius: 0; padding: 12mm; }
+  .receipt-card button { display: none; }
+}

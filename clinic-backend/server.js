@@ -15,7 +15,11 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors()); // Enable CORS for all routes
+app.use(cors());
+
+// Handle preflight OPTIONS requests
+
+
 app.use(express.json()); // To accept JSON data in the body
 
 // Mount Routers

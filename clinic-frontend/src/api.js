@@ -6,9 +6,9 @@ const mock = {
   getDoctors: async () => {
     // some sample doctors
     const sample = [
-      { _id: 'd1', name: 'Dr. Asha Sharma', specialty: 'General Physician' },
-      { _id: 'd2', name: 'Dr. Rohit Kumar', specialty: 'Pediatrician' },
-      { _id: 'd3', name: 'Dr. Meera Patel', specialty: 'Dermatologist' },
+      { _id: 'd1', name: 'Dr. Asha Sharma', specialization: 'General Physician', specialty: 'General Physician' },
+      { _id: 'd2', name: 'Dr. Rohit Kumar', specialization: 'Pediatrician', specialty: 'Pediatrician' },
+      { _id: 'd3', name: 'Dr. Meera Patel', specialization: 'Dermatologist', specialty: 'Dermatologist' },
     ];
     return sample;
   },
@@ -30,6 +30,12 @@ const mock = {
 };
 
 async function safeFetch(url, opts = {}) {
+  // Attach Authorization header if token present
+  const token = localStorage.getItem('token');
+  const headers = opts.headers || {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+  opts.headers = headers;
+
   const res = await fetch(url, opts);
   if (!res.ok) {
     const text = await res.text();
@@ -48,6 +54,11 @@ export async function fetchAppointments() {
   return safeFetch(`${API_BASE}/appointments`);
 }
 
+export async function fetchDoctorAppointments() {
+  if (USE_MOCK) return mock.getAppointments();
+  return safeFetch(`${API_BASE}/appointments/doctor/list`);
+}
+
 export async function createAppointment(data) {
   if (USE_MOCK) return mock.createAppointment(data);
   return safeFetch(`${API_BASE}/appointments`, {
@@ -60,4 +71,9 @@ export async function createAppointment(data) {
 export async function fetchAppointmentById(id) {
   if (USE_MOCK) return mock.getAppointmentById(id);
   return safeFetch(`${API_BASE}/appointments/${id}`);
+}
+
+export async function cancelAppointment(id) {
+  if (USE_MOCK) return { message: 'mock cancelled' };
+  return safeFetch(`${API_BASE}/appointments/${id}`, { method: 'DELETE' });
 }

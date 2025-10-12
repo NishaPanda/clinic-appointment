@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import './booking.css';
 
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:8080/api';
+
 export default function BookingForm() {
   const { doctorId } = useParams();
   const navigate = useNavigate();
@@ -20,72 +22,85 @@ export default function BookingForm() {
   });
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
+  // Don't read token/user here (parsing creates a new object each render and can
+  // trigger unnecessary effect re-runs). Read them inside effects/handlers.
 
-    // Fetch doctors
+    // Use a single API base so frontend uses the same backend address everywhere
+
+  useEffect(() => {
+    // Read auth info at effect time to avoid object identity changes causing re-renders
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user'));
+
+    if (!token) {
+      alert("Please login first to book an appointment");
+      navigate("/login");
+      return;
+    }
+
     const fetchDoctors = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/api/doctors', {
+        const res = await axios.get(`${API_BASE}/doctors`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setDoctors(res.data);
 
-        // If doctorId is passed via params, auto-select and name
+        // Auto-select doctor if doctorId param is present
         if (doctorId) {
           const doc = res.data.find(d => d._id === doctorId);
-          if (doc) setSelectedDoctorName(doc.name + ' — ' + doc.specialty);
+          if (doc) setSelectedDoctorName(doc.name + ' \u2014 ' + (doc.specialization || doc.specialty || ''));
         }
 
         setLoading(false);
       } catch (err) {
+        console.error("Error fetching doctors:", err);
         alert('Failed to fetch doctors: ' + (err.response?.data?.message || err.message));
         setLoading(false);
       }
     };
 
-    // Fetch patient info from localStorage or backend
-    const fetchPatientInfo = () => {
-      const patientName = localStorage.getItem('userName') || '';
-      const patientEmail = localStorage.getItem('userEmail') || '';
-      setForm(prev => ({ ...prev, patientName, patientEmail }));
-    };
-
     fetchDoctors();
-    fetchPatientInfo();
-  }, [doctorId]);
 
-  function handleChange(e) {
+    // Auto-fill patient info
+    if (user) {
+      setForm(prev => ({
+        ...prev,
+        patientName: user.name,
+        patientEmail: user.email
+      }));
+    }
+  }, [doctorId, navigate]);
+
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setForm(prev => ({ ...prev, [name]: value }));
 
-    // Update selected doctor name
     if (name === 'doctorId') {
       const doc = doctors.find(d => d._id === value);
-      setSelectedDoctorName(doc ? doc.name + ' — ' + doc.specialty : '');
+      setSelectedDoctorName(doc ? doc.name + ' — ' + (doc.specialization || doc.specialty || '') : '');
     }
-  }
-
-  // Convert 24-hour to 12-hour for display
-  const formatTime12 = (time24) => {
-    if (!time24) return '';
-    const [hourStr, min] = time24.split(':');
-    let hour = parseInt(hourStr, 10);
-    const ampm = hour >= 12 ? 'PM' : 'AM';
-    hour = hour % 12 || 12;
-    return `${hour}:${min} ${ampm}`;
   };
 
-async function handleSubmit(e) {
+const handleSubmit = async (e) => {
   e.preventDefault();
+
   if (!form.patientName || !form.patientEmail || !form.doctorId || !form.date || !form.time) {
     alert('Please fill all required fields.');
+    return;
+  }
+  // Read token and user lazily to avoid hook dependency issues
+  const token = localStorage.getItem('token');
+  const user = JSON.parse(localStorage.getItem('user'));
+
+  if (!token || !user) {
+    alert("Please login first.");
+    navigate("/login");
     return;
   }
 
   try {
     const payload = {
-      patientId: localStorage.getItem('userId'), // send patient ID
+      patientId: user.id,
       patientName: form.patientName,
       patientEmail: form.patientEmail,
       date: form.date,
@@ -93,18 +108,26 @@ async function handleSubmit(e) {
       reason: form.reason
     };
 
+    // Send request using API base so it matches other calls and env var
     const res = await axios.post(
-      `http://localhost:8080/api/appointments/doctors/book/${form.doctorId}`,
-      payload
+      `${API_BASE}/appointments/doctors/book/${form.doctorId}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
+      }
     );
 
     alert('Appointment booked successfully!');
     navigate(`/receipt/${res.data.appointment._id}`);
   } catch (err) {
-    alert('Booking failed: ' + (err.response?.data?.message || err.message));
+     console.error("Booking error:", err, err.response?.data || err.response?.statusText || 'no response body');
+     const serverMsg = err.response?.data?.message || JSON.stringify(err.response?.data) || err.message;
+     alert('Booking failed: ' + serverMsg);
   }
-}
-
+};
 
   if (loading) return <div className="booking-card">Loading...</div>;
 
@@ -127,7 +150,7 @@ async function handleSubmit(e) {
           <select name="doctorId" value={form.doctorId} onChange={handleChange}>
             <option value="">-- choose doctor --</option>
             {doctors.map(d => (
-              <option key={d._id} value={d._id}>{d.name} — {d.specialty}</option>
+              <option key={d._id} value={d._id}>{d.name} — {d.specialization || d.specialty || ''}</option>
             ))}
           </select>
         </div>
@@ -154,7 +177,17 @@ async function handleSubmit(e) {
           <button type="submit">Confirm Booking</button>
           <button
             type="button"
-            onClick={() => setForm({ patientName: '', patientEmail: '', doctorId: doctorId || '', date: '', time: '', reason: '' })}
+            onClick={() => {
+              const user = JSON.parse(localStorage.getItem('user'));
+              setForm({
+                patientName: user?.name || '',
+                patientEmail: user?.email || '',
+                doctorId: doctorId || '',
+                date: '',
+                time: '',
+                reason: ''
+              });
+            }}
           >
             Reset
           </button>

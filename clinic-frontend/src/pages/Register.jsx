@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE } from '../config';
 import './Register.css';
 
 export default function Register() {
@@ -29,13 +30,22 @@ export default function Register() {
     };
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/register", data, {
+      const res = await axios.post(`${API_BASE}/auth/register`, data, {
         headers: { "Content-Type": "application/json" }
       });
 
       alert(`Registered successfully as ${res.data.user.role}`);
-      localStorage.setItem("token", res.data.token);
-      navigate("/");
+      // Auto-login if token and user are returned
+      if (res.data && res.data.token && res.data.user) {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        // trigger storage event so NavBar updates
+        window.dispatchEvent(new Event('storage'));
+        navigate("/");
+      } else {
+        // Fallback: redirect to login
+        navigate('/login');
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Registration failed");
     }
