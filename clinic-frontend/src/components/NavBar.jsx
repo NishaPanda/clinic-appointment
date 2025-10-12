@@ -13,5 +13,6 @@ export default function NavBar() {
       <NavLink to="/register" className={({isActive})=> isActive ? 'active' : ''}>Register</NavLink>
       <div style={{marginLeft:'auto', color:'#999', fontSize:13}}>Frontend — Vite React</div>
     </nav>
+    //anway is donkey
   );
 }
