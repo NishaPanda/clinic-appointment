@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAppointments, fetchDoctors } from '../api';
 import dayjs from 'dayjs';
+import './appointment.css';
 
 export default function MyAppointments() {
   const [appts, setAppts] = useState([]);
@@ -19,20 +20,30 @@ export default function MyAppointments() {
     return d ? `${d.name} (${d.specialty})` : 'Unknown doctor';
   }
 
-  if (!appts.length) return <div className="card"><h3>No appointments yet</h3><p className="small">Book one from Doctors page.</p></div>;
+  if (!appts.length) 
+    return (
+      <div className="appointments-container no-appointments">
+        <h3>No appointments yet</h3>
+        <p className="small">Book one from Doctors page.</p>
+      </div>
+    );
 
   return (
-    <div>
+    <div className="appointments-container">
       <h2>My Appointments</h2>
-      {appts.map(a => (
-        <div key={a._id} className="card">
-          <div style={{display:'flex', justifyContent:'space-between'}}>
+      {appts.map((a, index) => (
+        <div
+          key={a._id}
+          className="appointment-card"
+          style={{ animationDelay: `${index * 0.1}s` }} // staggered fade-in
+        >
+          <div className="appointment-info">
             <div>
-              <div style={{fontWeight:600}}>{a.patientName} — {doctorName(a.doctorId)}</div>
-              <div className="small">{dayjs(a.date).format('YYYY-MM-DD')} at {a.time}</div>
-              <div className="small">Booked: {dayjs(a.createdAt).format('YYYY-MM-DD HH:mm')}</div>
+              <div className="patient-doctor">{a.patientName} — {doctorName(a.doctorId)}</div>
+              <div className="appointment-date">{dayjs(a.date).format('YYYY-MM-DD')} at {a.time}</div>
+              <div className="appointment-booked">Booked: {dayjs(a.createdAt).format('YYYY-MM-DD HH:mm')}</div>
             </div>
-            <div style={{display:'flex', flexDirection:'column', gap:8, justifyContent:'center'}}>
+            <div>
               <Link to={`/receipt/${a._id}`}><button>Receipt</button></Link>
             </div>
           </div>

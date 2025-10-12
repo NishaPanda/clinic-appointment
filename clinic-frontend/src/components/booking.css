@@ -1,0 +1,133 @@
+/* BookingForm.css */
+
+/* Container card */
+.booking-card {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto; /* reduced top space */
+  padding: 30px;
+  background-color: #f0fdfd; /* very light teal */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+/* Headings */
+.booking-card h3 {
+  color: #00796b;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Form fields */
+.booking-card .field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.booking-card label {
+  font-weight: 500;
+  color: #004d40;
+}
+
+.booking-card input,
+.booking-card select,
+.booking-card textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.booking-card input:focus,
+.booking-card select:focus,
+.booking-card textarea:focus {
+  border-color: #00bfa5;
+}
+
+/* Flex container for date/time fields */
+.booking-card .flex-row.date-time {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.booking-card .flex-row.date-time > .field {
+  flex: 1;
+}
+
+/* Buttons container */
+.booking-card .flex-row.buttons {
+  margin-top: 15px; /* top gap above buttons */
+  display: flex;
+  gap: 10px;
+}
+
+/* Buttons */
+.booking-card button {
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.booking-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.4);
+}
+
+/* Reset button style */
+.booking-card button[type="button"] {
+  background: #ccc;
+  color: #004d40;
+}
+
+.booking-card button[type="button"]:hover {
+  background: #b0b0b0;
+}
+
+/* Small text */
+.booking-card .small {
+  color: #004d40;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Fade-in animation */
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 480px) {
+  .booking-card {
+    padding: 20px 15px;
+  }
+
+  .booking-card .flex-row.date-time {
+    flex-direction: column;
+  }
+
+  .booking-card .flex-row.buttons {
+    flex-direction: column;
+  }
+
+  .booking-card button {
+    width: 100%;
+  }
+}

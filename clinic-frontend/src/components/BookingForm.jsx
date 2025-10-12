@@ -1,8 +1,8 @@
 // src/components/BookingForm.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchDoctors, createAppointment, fetchDoctors as fetchDoc } from '../api';
-import dayjs from 'dayjs';
+import { fetchDoctors, createAppointment } from '../api';
+import './booking.css';
 
 export default function BookingForm() {
   const { doctorId } = useParams();
@@ -24,9 +24,6 @@ export default function BookingForm() {
       .then(data => {
         setDoctors(data);
         setLoading(false);
-        if (doctorId && data.some(d => d._id === doctorId) === false) {
-          // doctorId may be invalid, still allow selecting
-        }
       })
       .catch(err => { alert(err.message); setLoading(false); });
   }, [doctorId]);
@@ -38,35 +35,28 @@ export default function BookingForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    // basic validation
     if (!form.patientName || !form.patientEmail || !form.doctorId || !form.date || !form.time) {
       alert('Please fill all required fields.');
       return;
     }
-    // prepare payload
+
     const payload = {
-      patientName: form.patientName,
-      patientEmail: form.patientEmail,
-      doctorId: form.doctorId,
-      date: form.date,
-      time: form.time,
-      reason: form.reason,
+      ...form,
       createdAt: new Date().toISOString()
     };
 
     try {
       const appt = await createAppointment(payload);
-      // redirect to receipt page
       navigate(`/receipt/${appt._id}`);
     } catch (err) {
       alert('Booking failed: ' + err.message);
     }
   }
 
-  if (loading) return <div className="card">Loading...</div>;
+  if (loading) return <div className="booking-card">Loading...</div>;
 
   return (
-    <div className="card">
+    <div className="booking-card">
       <h3>Book Appointment</h3>
       <form onSubmit={handleSubmit}>
         <div className="field">
@@ -76,7 +66,7 @@ export default function BookingForm() {
 
         <div className="field">
           <label>Patient Email *</label>
-          <input name="patientEmail" value={form.patientEmail} onChange={handleChange} type="email" />
+          <input name="patientEmail" type="email" value={form.patientEmail} onChange={handleChange} />
         </div>
 
         <div className="field">
@@ -87,12 +77,12 @@ export default function BookingForm() {
           </select>
         </div>
 
-        <div style={{display:'flex', gap:12}}>
-          <div className="field" style={{flex:1}}>
+        <div className="flex-row date-time">
+          <div className="field">
             <label>Date *</label>
             <input name="date" type="date" value={form.date} onChange={handleChange} />
           </div>
-          <div className="field" style={{flex:1}}>
+          <div className="field">
             <label>Time *</label>
             <input name="time" type="time" value={form.time} onChange={handleChange} />
           </div>
@@ -103,12 +93,15 @@ export default function BookingForm() {
           <textarea name="reason" rows="3" value={form.reason} onChange={handleChange}></textarea>
         </div>
 
-        <div style={{display:'flex', gap:10}}>
+        <div className="flex-row buttons">
           <button type="submit">Confirm Booking</button>
-          <button type="button" onClick={()=> { setForm({patientName:'',patientEmail:'',doctorId:'',date:'',time:'',reason:''})}}>Reset</button>
+          <button type="button" onClick={() => setForm({patientName:'',patientEmail:'',doctorId:'',date:'',time:'',reason:''})}>
+            Reset
+          </button>
         </div>
       </form>
-      <p className="small" style={{marginTop:10}}>
+
+      <p className="small">
         Tip: after booking you’ll be redirected to a receipt page you can save or print.
       </p>
     </div>

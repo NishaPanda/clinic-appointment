@@ -1,5 +1,4 @@
-/* 🌿 Clinic Appointment System — Basic Clean Design */
-
+/* 
 :root {
   --primary: #007bff;
   --secondary: #6c757d;
@@ -19,7 +18,7 @@ body {
   line-height: 1.6;
 }
 
-/* ---------- Navbar ---------- */
+
 .navbar {
   background: var(--white);
   display: flex;
@@ -51,14 +50,12 @@ body {
   color: var(--primary);
 }
 
-/* ---------- Container ---------- */
 .container {
   max-width: 900px;
   margin: 30px auto;
   padding: 0 20px;
 }
 
-/* ---------- Cards ---------- */
 .card {
   background: var(--white);
   border-radius: var(--radius);
@@ -81,7 +78,6 @@ h2 {
   color: var(--primary);
 }
 
-/* ---------- Forms ---------- */
 form {
   margin-top: 10px;
 }
@@ -120,7 +116,7 @@ textarea:focus {
   box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
 }
 
-/* ---------- Buttons ---------- */
+
 button {
   background: var(--primary);
   color: white;
@@ -144,7 +140,7 @@ button.secondary:hover {
   background: #555;
 }
 
-/* ---------- Utilities ---------- */
+
 .flex {
   display: flex;
   align-items: center;
@@ -169,7 +165,7 @@ button.secondary:hover {
   text-decoration: underline;
 }
 
-/* ---------- Receipt Page ---------- */
+
 .receipt-card {
   background: var(--white);
   border-radius: var(--radius);
@@ -235,4 +231,4 @@ button.secondary:hover {
   .print-btn {
     padding: 10px 0;
   }
-}
+} */

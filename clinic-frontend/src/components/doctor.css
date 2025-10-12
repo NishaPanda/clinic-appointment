@@ -1,0 +1,109 @@
+/* DoctorList.css */
+
+/* Container */
+.doctor-container {
+  padding: 40px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0fdfd; /* very light teal */
+  min-height: calc(100vh - 70px); /* minus navbar height */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+/* Page heading */
+.doctor-container h2 {
+  color: #00796b; /* dark teal */
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Card for each doctor */
+.doctor-card {
+  background-color: #e0f7f5; /* light teal */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  padding: 20px 25px;
+  width: 100%;
+  max-width: 900px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Doctor info */
+.doctor-card .doctor-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doctor-card .doctor-info div:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-card .doctor-info div:first-child .doctor-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #004d40;
+}
+
+.doctor-card .doctor-info div:first-child .doctor-specialty {
+  font-size: 0.9rem;
+  color: #00695c;
+}
+
+/* Book button */
+.doctor-card button {
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+  color: #fff;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.doctor-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.4);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .doctor-card .doctor-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .doctor-card button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .doctor-container {
+    padding: 20px 10px;
+    gap: 20px;
+  }
+
+  .doctor-card {
+    padding: 15px 20px;
+  }
+
+  .doctor-card .doctor-info .doctor-name {
+    font-size: 1rem;
+  }
+
+  .doctor-card .doctor-info .doctor-specialty {
+    font-size: 0.85rem;
+  }
+}

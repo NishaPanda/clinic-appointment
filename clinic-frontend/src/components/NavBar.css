@@ -1,0 +1,166 @@
+/* ===============================
+   Navbar Container
+================================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  background: linear-gradient(270deg, #11bca5, #42bab8, #5bdccd);
+  background-size: 600% 600%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* ===============================
+   Brand (Left)
+================================ */
+.navbar-brand {
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+}
+
+.brand-health { color: #f1fffd; }   /* almost white for "Health" */
+.brand-hub { color: #2d7c72; }      /* deep cyan for "Hub" */
+
+
+/* ===============================
+   Center Links
+================================ */
+.navbar-links {
+  display: flex;
+  gap: 60px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 6px 10px;
+  position: relative; /* for underline */
+  transition: color 0.3s ease;
+}
+
+/* Smooth animated underline */
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #ffffff; /* underline color */
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-links a:hover::after,
+.navbar-links a.active::after {
+  width: 100%;
+}
+
+/* ===============================
+   Right-side Auth Links
+================================ */
+.navbar-auth {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-auth a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.navbar-auth a:hover {
+  background-color: #ffffff;
+  color: #00bfa5;
+  border: 1px solid #ffffff;
+}
+
+/* ===============================
+   Hamburger Menu (Mobile)
+================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.hamburger .line.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger .line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger .line.open:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===============================
+   Responsive (Mobile <=768px)
+================================ */
+@media screen and (max-width: 768px) {
+  .navbar-links,
+  .navbar-auth {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #00bfa5;
+    padding: 20px;
+    display: none;
+  }
+
+  .navbar-links.active,
+  .navbar-auth.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links a,
+  .navbar-auth a {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+/* ===============================
+   Body Padding for Fixed Navbar
+================================ */
+body {
+  padding-top: 70px; /* space so content not hidden behind navbar */
+}
