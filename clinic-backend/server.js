@@ -3,6 +3,8 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const connectDB = require('./db');
 const authRoutes = require('./Routers/authRouter');
+const doctorRoutes = require('./Routers/doctRouter');
+const appointmentRoutes = require('./Routers/appointmentRouter');
 
 // Load env vars
 dotenv.config();
@@ -18,6 +20,10 @@ app.use(express.json()); // To accept JSON data in the body
 
 // Mount Routers
 app.use('/api/auth', authRoutes);
+
+app.use('/api/doctors', doctorRoutes);
+
+app.use('/api/appointments', appointmentRoutes);
 // You can add other routes here, e.g., for appointments
 // app.use('/api/appointments', appointmentRoutes);
 
