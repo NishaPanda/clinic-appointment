@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import './Login.css';
+import "./Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -15,12 +15,11 @@ export default function Login() {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:8080/api/auth/login", {
-        email,
-        password
-      }, {
-        headers: { "Content-Type": "application/json" }
-      });
+      const res = await axios.post(
+        "http://localhost:8080/api/auth/login",
+        { email, password },
+        { headers: { "Content-Type": "application/json" } }
+      );
 
       if (res.data.user.role !== role) {
         setError(`You selected role "${role}" but account is "${res.data.user.role}"`);
@@ -28,8 +27,13 @@ export default function Login() {
       }
 
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      // ✅ Trigger storage event to update NavBar login state
+      window.dispatchEvent(new Event("storage"));
+
       alert(`Logged in successfully as ${res.data.user.role}`);
-      navigate("/dashboard");
+      navigate("/");
 
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
@@ -50,12 +54,22 @@ export default function Login() {
 
         <label>
           Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </label>
 
         {error && <p className="login-error">{error}</p>}
@@ -64,7 +78,10 @@ export default function Login() {
       </form>
 
       <p style={{ marginTop: "15px" }}>
-        Don't have an account? <Link to="/register" className="login-link">Register</Link>
+        Don't have an account?{" "}
+        <Link to="/register" className="login-link">
+          Register
+        </Link>
       </p>
     </div>
   );
