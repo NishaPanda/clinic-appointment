@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import './Home.css';
 
 export default function Home() {
+  const user = JSON.parse(localStorage.getItem('user') || 'null');
+
   return (
     <div className="home-container">
       <div className="home-card">
@@ -12,9 +14,11 @@ export default function Home() {
           Book doctor visits, view appointments and get receipts.
         </p>
         <div style={{marginTop: 12}}>
-          <Link to="/doctors">
-            <button>Find doctors</button>
-          </Link>
+          {user && user.role && String(user.role).toLowerCase() === 'doctor' ? (
+            <Link to="/profile"><button>My Patients</button></Link>
+          ) : (
+            <Link to="/doctors"><button>Find doctors</button></Link>
+          )}
         </div>
       </div>
 
