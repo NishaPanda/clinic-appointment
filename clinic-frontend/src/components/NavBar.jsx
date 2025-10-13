@@ -110,13 +110,13 @@ export default function NavBar() {
             </NavLink>
           </>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', }}>
             {user?.role === 'doctor' && (
               <div className="patients-dropdown" onClick={(e) => { e.stopPropagation(); setPatientsOpen(!patientsOpen); }}>
-                <div className="patients-icon">👥</div>
+                <div className="patients-icon" style={{ cursor: 'pointer' }}>👥</div>
                 <div className="patients-badge">{nextAppointments.length}</div>
                 {patientsOpen && (
-                  <div className="patients-menu">
+                  <div className="patients-menu" style={{color: "black"}}>
                     <div className="patients-header">Upcoming Patients</div>
                     {nextAppointments.length === 0 ? (
                       <div className="patient-item">No upcoming appointments</div>
