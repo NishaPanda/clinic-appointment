@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchAppointments, fetchDoctors, fetchDoctorAppointments } from '../api';
 import { cancelAppointment } from '../api';
+import { acceptAppointment, rejectAppointment } from '../api';
 import dayjs from 'dayjs';
 import './appointment.css';
 
@@ -67,8 +68,51 @@ export default function MyAppointments() {
               <div className="appointment-booked">Booked: {dayjs(a.createdAt).format('YYYY-MM-DD HH:mm')}</div>
             </div>
               <div>
-                <Link to={`/receipt/${a._id}`}><button>Receipt</button></Link>
-                {a.status !== 'cancelled' ? (
+                {user.role !== 'doctor' && (
+                  <Link to={`/receipt/${a._id}`}><button>Receipt</button></Link>
+                )}
+                {user.role === 'doctor' && a.status === 'pending' && (
+                  <>
+                    <button
+                      style={{ marginLeft: 8 }}
+                      disabled={processing[`accept_${a._id}`]}
+                      onClick={async () => {
+                        setProcessing(prev => ({ ...prev, [`accept_${a._id}`]: true }));
+                        try {
+                          await acceptAppointment(a._id);
+                          const newAppts = await fetchDoctorAppointments();
+                          setAppts(newAppts);
+                        } catch (err) {
+                          console.error('Accept error', err);
+                          alert('Accept failed: ' + (err.message || 'Unknown error'));
+                        } finally {
+                          setProcessing(prev => ({ ...prev, [`accept_${a._id}`]: false }));
+                        }
+                      }}
+                    >Accept</button>
+
+                    <button
+                      style={{ marginLeft: 8 }}
+                      disabled={processing[`reject_${a._id}`]}
+                      onClick={async () => {
+                        if (!confirm('Reject this appointment?')) return;
+                        setProcessing(prev => ({ ...prev, [`reject_${a._id}`]: true }));
+                        try {
+                          await rejectAppointment(a._id);
+                          const newAppts = await fetchDoctorAppointments();
+                          setAppts(newAppts);
+                        } catch (err) {
+                          console.error('Reject error', err);
+                          alert('Reject failed: ' + (err.message || 'Unknown error'));
+                        } finally {
+                          setProcessing(prev => ({ ...prev, [`reject_${a._id}`]: false }));
+                        }
+                      }}
+                    >Reject</button>
+                  </>
+                )}
+
+                {user.role !== 'doctor' && a.status === 'pending' && (
                   <button
                     style={{ marginLeft: 8 }}
                     disabled={processing[a._id]}
@@ -77,12 +121,11 @@ export default function MyAppointments() {
                       setProcessing(prev => ({ ...prev, [a._id]: true }));
                       try {
                         await cancelAppointment(a._id);
-                        // refresh
+                        // refresh list for patient
                         const newAppts = await fetchAppointments();
                         setAppts(newAppts);
                       } catch (err) {
                         console.error('Cancel error', err);
-                        // err.message already contains API Error info from safeFetch
                         alert('Cancel failed: ' + (err.message || 'Unknown error'));
                       } finally {
                         setProcessing(prev => ({ ...prev, [a._id]: false }));
@@ -91,8 +134,14 @@ export default function MyAppointments() {
                   >
                     {processing[a._id] ? 'Cancelling...' : 'Cancel'}
                   </button>
-                ) : (
-                  <span style={{ marginLeft: 8, color: '#888', fontWeight: 600 }}>Cancelled</span>
+                )}
+
+                {a.status !== 'cancelled' && a.status !== 'pending' && (
+                  a.status === 'rejected' ? (
+                    <span style={{ marginLeft: 8, color: '#c0392b', fontWeight: 600 }}>Rejected</span>
+                  ) : (
+                    <span style={{ marginLeft: 8, color: '#2e8b57', fontWeight: 600 }}>{a.status}</span>
+                  )
                 )}
               </div>
           </div>

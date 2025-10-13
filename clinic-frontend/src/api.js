@@ -77,3 +77,13 @@ export async function cancelAppointment(id) {
   if (USE_MOCK) return { message: 'mock cancelled' };
   return safeFetch(`${API_BASE}/appointments/${id}`, { method: 'DELETE' });
 }
+
+export async function acceptAppointment(id) {
+  if (USE_MOCK) return { message: 'mock accepted', appointment: { _id: id, status: 'confirmed' } };
+  return safeFetch(`${API_BASE}/appointments/${id}/accept`, { method: 'POST' });
+}
+
+export async function rejectAppointment(id) {
+  if (USE_MOCK) return { message: 'mock rejected', appointment: { _id: id, status: 'rejected' } };
+  return safeFetch(`${API_BASE}/appointments/${id}/reject`, { method: 'POST' });
+}

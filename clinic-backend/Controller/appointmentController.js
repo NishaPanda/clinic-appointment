@@ -105,6 +105,61 @@ exports.getAppointmentsForDoctor = async (req, res) => {
   }
 };
 
+// Doctor accepts appointment (marks confirmed and generates receipt server-side fields if needed)
+exports.acceptAppointment = async (req, res) => {
+  try {
+    const apptId = req.params.id;
+    const appointment = await Appointment.findById(apptId);
+    if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+
+    // Only the doctor assigned can accept
+    if (String(appointment.doctor) !== String(req.user.id)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    if (appointment.status !== 'pending') {
+      return res.status(400).json({ message: 'Only pending appointments can be accepted' });
+    }
+
+    appointment.status = 'confirmed';
+  appointment.confirmedAt = new Date();
+  await appointment.save();
+
+    // Optionally, generate receipt or any additional processing here
+
+    res.status(200).json({ message: 'Appointment accepted', appointment });
+  } catch (err) {
+    console.error('acceptAppointment error', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
+// Doctor rejects appointment
+exports.rejectAppointment = async (req, res) => {
+  try {
+    const apptId = req.params.id;
+    const appointment = await Appointment.findById(apptId);
+    if (!appointment) return res.status(404).json({ message: 'Appointment not found' });
+
+    if (String(appointment.doctor) !== String(req.user.id)) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    if (appointment.status !== 'pending') {
+      return res.status(400).json({ message: 'Only pending appointments can be rejected' });
+    }
+
+    appointment.status = 'rejected';
+  appointment.rejectedAt = new Date();
+  await appointment.save();
+
+    res.status(200).json({ message: 'Appointment rejected', appointment });
+  } catch (err) {
+    console.error('rejectAppointment error', err);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+};
+
 // Cancel appointment (patient or doctor can cancel)
 exports.cancelAppointment = async (req, res) => {
   try {

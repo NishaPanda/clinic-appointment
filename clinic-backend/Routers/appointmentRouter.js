@@ -1,7 +1,7 @@
 // routes/doctorRoutes.js
 const express = require("express");
 const router = express.Router();
-const { getMyAppointments, bookAppointment, getDoctors, getAppointmentById, getAppointmentsForDoctor, cancelAppointment } = require("../Controller/appointmentController");
+const { getMyAppointments, bookAppointment, getDoctors, getAppointmentById, getAppointmentsForDoctor, cancelAppointment, acceptAppointment, rejectAppointment } = require("../Controller/appointmentController");
 const authMiddleware = require("../Middelware/authMiddleware"); // ensures req.user exists
 
 // Get all doctors
@@ -19,6 +19,10 @@ router.get("/appointments/me", authMiddleware, getMyAppointments);
 // Get appointment by id
 // Get appointments for logged-in doctor
 router.get("/doctor/list", authMiddleware, getAppointmentsForDoctor);
+
+// Accept/reject (doctor actions)
+router.post('/:id/accept', authMiddleware, acceptAppointment);
+router.post('/:id/reject', authMiddleware, rejectAppointment);
 
 // Cancel appointment (DELETE)
 router.delete("/:id", authMiddleware, cancelAppointment);
