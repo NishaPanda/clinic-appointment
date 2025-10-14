@@ -4,27 +4,44 @@
 .booking-card {
   width: 100%;
   max-width: 600px;
+<<<<<<< HEAD
   margin: 20px auto;
   padding: 30px;
   background: linear-gradient(145deg, #ffffff, #f2f9fc); /* subtle white → light cyan */
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+=======
+  margin: 20px auto; /* reduced top space */
+  padding: 30px;
+  background-color: #f0fdfd; /* very light teal */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   gap: 20px;
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
+<<<<<<< HEAD
   position: relative;
   overflow: hidden;
+=======
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Headings */
 .booking-card h3 {
+<<<<<<< HEAD
   color: #0456c1; /* dark blue */
   margin-bottom: 10px;
   text-align: center;
   text-shadow: 0 1px 2px rgba(4, 86, 193, 0.12);
+=======
+  color: #00796b;
+  margin-bottom: 10px;
+  text-align: center;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Form fields */
@@ -36,7 +53,11 @@
 
 .booking-card label {
   font-weight: 500;
+<<<<<<< HEAD
   color: #004c80;
+=======
+  color: #004d40;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .booking-card input,
@@ -47,14 +68,22 @@
   border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
+<<<<<<< HEAD
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+=======
+  transition: border-color 0.3s ease;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .booking-card input:focus,
 .booking-card select:focus,
 .booking-card textarea:focus {
+<<<<<<< HEAD
   border-color: #0456c1;
   box-shadow: 0 2px 8px rgba(4, 86, 193, 0.2);
+=======
+  border-color: #00bfa5;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Flex container for date/time fields */
@@ -70,7 +99,11 @@
 
 /* Buttons container */
 .booking-card .flex-row.buttons {
+<<<<<<< HEAD
   margin-top: 15px;
+=======
+  margin-top: 15px; /* top gap above buttons */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   display: flex;
   gap: 10px;
 }
@@ -84,29 +117,51 @@
   border-radius: 8px;
   cursor: pointer;
   color: #fff;
+<<<<<<< HEAD
   background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 12px rgba(4, 86, 193, 0.3);
+=======
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .booking-card button:hover {
   transform: translateY(-2px);
+<<<<<<< HEAD
   box-shadow: 0 6px 15px rgba(4, 86, 193, 0.35);
+=======
+  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.4);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Reset button style */
 .booking-card button[type="button"] {
+<<<<<<< HEAD
   background: #b0c4dc; /* subtle light blue-gray */
   color: #004c80;
 }
 
 .booking-card button[type="button"]:hover {
   background: #94b0d0;
+=======
+  background: #ccc;
+  color: #004d40;
+}
+
+.booking-card button[type="button"]:hover {
+  background: #b0b0b0;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Small text */
 .booking-card .small {
+<<<<<<< HEAD
   color: #004c80;
+=======
+  color: #004d40;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-size: 0.85rem;
   text-align: center;
   margin-top: 10px;

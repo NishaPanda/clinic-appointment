@@ -20,6 +20,7 @@ export default function NavBar() {
 
     checkUser(); // Initial check
     window.addEventListener("storage", checkUser);
+<<<<<<< HEAD
     window.addEventListener("focus", checkUser);
     window.addEventListener("user-profile-updated", checkUser);
     return () => {
@@ -27,6 +28,9 @@ export default function NavBar() {
       window.removeEventListener("focus", checkUser);
       window.removeEventListener("user-profile-updated", checkUser);
     };
+=======
+    return () => window.removeEventListener("storage", checkUser);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   }, []);
 
   // If logged in as doctor, fetch upcoming appointments for quick access
@@ -142,7 +146,11 @@ export default function NavBar() {
 
             <div className="profile-dropdown">
               <div className="profile-icon" onClick={() => setDropdownOpen(!dropdownOpen)}>
+<<<<<<< HEAD
                 👤 {user && user.name ? user.name.split(" ")[0] : "User"}
+=======
+                👤 {user.name ? user.name.split(" ")[0] : "User"}
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
               </div>
               {dropdownOpen && (
                 <div className="dropdown-menu">

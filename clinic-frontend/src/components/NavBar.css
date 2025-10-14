@@ -28,19 +28,33 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   padding: 14px 50px;
   background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
   color: #ffffff;
+=======
+  padding: 12px 40px;
+  background: linear-gradient(270deg, #11bca5, #42bab8, #5bdccd);
+  background-size: 600% 600%;
+  animation: gradientBG 15s ease infinite;
+  color: #fff;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-family: 'Poppins', sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+<<<<<<< HEAD
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
 }
 
 
+=======
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 @keyframes gradientBG {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -57,7 +71,11 @@
 }
 
 .brand-health { color: #f1fffd; }   /* almost white for "Health" */
+<<<<<<< HEAD
 .brand-hub { color: #bfb3eb; }      /* deep cyan for "Hub" */
+=======
+.brand-hub { color: #2d7c72; }      /* deep cyan for "Hub" */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 
 
 /* ===============================

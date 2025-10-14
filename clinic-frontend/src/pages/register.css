@@ -1,20 +1,35 @@
+<<<<<<< HEAD
 /* Register.css - Blue-Cyan Theme with Animations */
+=======
+/* Register.css - Teal-Cyan Theme with Animations */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 
 /* Container with fade-in */
 .register-container {
   width: 400px;
   max-width: 90%;
+<<<<<<< HEAD
   margin: 10px auto;
   padding: 30px;
   background: linear-gradient(145deg, #ffffff, #eaf6fc); /* soft white → light cyan */
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(4, 86, 193, 0.15);
+=======
+  margin:10px auto;
+  padding: 30px;
+  background-color: #e0f7f5; /* light teal */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-family: 'Poppins', sans-serif;
   text-align: center;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
+<<<<<<< HEAD
   color: #004d52;
+=======
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Fade-in keyframes */
@@ -26,7 +41,11 @@
 /* Heading */
 .register-container h2 {
   margin-bottom: 25px;
+<<<<<<< HEAD
   color: #0456c1; /* deep blue */
+=======
+  color: #00796b;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Form */
@@ -42,7 +61,11 @@
   flex-direction: column;
   text-align: left;
   font-weight: 500;
+<<<<<<< HEAD
   color: #004d52; /* deep blue/teal */
+=======
+  color: #004d40;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .register-form input,
@@ -51,15 +74,24 @@
   margin-top: 5px;
   font-size: 14px;
   border-radius: 8px;
+<<<<<<< HEAD
   border: 1px solid #26c6da; /* light cyan border */
+=======
+  border: 1px solid #00bfa5;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   outline: none;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .register-form input:focus,
 .register-form select:focus {
+<<<<<<< HEAD
   border-color: #0456c1;
   box-shadow: 0 0 8px rgba(4, 86, 193, 0.2);
+=======
+  border-color: #00796b;
+  box-shadow: 0 0 8px rgba(0, 191, 165, 0.3);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Button */
@@ -70,15 +102,24 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
+<<<<<<< HEAD
   background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+=======
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   color: #fff;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
 .register-form button:hover {
   transform: translateY(-2px);
+<<<<<<< HEAD
   box-shadow: 0 4px 12px rgba(4, 86, 193, 0.4);
   background: linear-gradient(90deg, #0261a9 0%, #33cde0 100%);
+=======
+  box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
+  background: linear-gradient(90deg, #00cfc0 0%, #5fd1d0 100%);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Error message */
@@ -90,14 +131,22 @@
 
 /* Login link */
 .register-link {
+<<<<<<< HEAD
   color: #0456c1;
+=======
+  color: #00796b;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .register-link:hover {
+<<<<<<< HEAD
   color: #26c6da;
+=======
+  color: #00bfa5;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Row for Age and Gender */

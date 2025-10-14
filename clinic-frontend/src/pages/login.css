@@ -4,15 +4,24 @@
   max-width: 90%;
   margin: 50px auto 60px; /* Top margin increased to create gap below navbar */
   padding: 30px;
+<<<<<<< HEAD
   background: linear-gradient(145deg, #ffffff, #eaf6fc); /* soft white → light cyan */
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+=======
+  background-color: #e0f7f5; /* light teal */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-family: 'Poppins', sans-serif;
   text-align: center;
   opacity: 0;
   animation: fadeIn 0.8s forwards;
+<<<<<<< HEAD
   border: 1px solid rgba(4, 86, 193, 0.15);
   color: #004d52;
+=======
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Fade-in animation keyframes */
@@ -24,7 +33,11 @@
 /* Heading */
 .login-container h2 {
   margin-bottom: 25px;
+<<<<<<< HEAD
   color: #0456c1; /* deep blue for consistency */
+=======
+  color: #00796b; /* dark teal */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Form */
@@ -40,7 +53,11 @@
   flex-direction: column;
   text-align: left;
   font-weight: 500;
+<<<<<<< HEAD
   color: #004d52; /* deep blue/teal */
+=======
+  color: #004d40; /* deep teal */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .login-form input,
@@ -49,15 +66,24 @@
   margin-top: 5px;
   font-size: 14px;
   border-radius: 8px;
+<<<<<<< HEAD
   border: 1px solid #26c6da; /* light cyan border */
+=======
+  border: 1px solid #00bfa5;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   outline: none;
   transition: border 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-form input:focus,
 .login-form select:focus {
+<<<<<<< HEAD
   border-color: #0456c1;
   box-shadow: 0 0 8px rgba(4, 86, 193, 0.2);
+=======
+  border-color: #00796b;
+  box-shadow: 0 0 8px rgba(0, 191, 165, 0.3);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Button with gradient */
@@ -68,15 +94,24 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 15px;
+<<<<<<< HEAD
   background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+=======
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   color: #fff;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
 }
 
 .login-form button:hover {
   transform: translateY(-2px);
+<<<<<<< HEAD
   box-shadow: 0 4px 12px rgba(4, 86, 193, 0.4);
   background: linear-gradient(90deg, #0261a9 0%, #33cde0 100%);
+=======
+  box-shadow: 0 4px 12px rgba(0, 191, 165, 0.4);
+  background: linear-gradient(90deg, #00cfc0 0%, #5fd1d0 100%);
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Error message */
@@ -88,14 +123,22 @@
 
 /* Register link */
 .login-link {
+<<<<<<< HEAD
   color: #0456c1;
+=======
+  color: #00796b;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease;
 }
 
 .login-link:hover {
+<<<<<<< HEAD
   color: #26c6da;
+=======
+  color: #00bfa5;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* Responsive */

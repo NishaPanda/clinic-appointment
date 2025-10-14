@@ -1,15 +1,27 @@
+<<<<<<< HEAD
 /* General container padding */
 .home-container {
   padding: 50px 20px;
   font-family: 'Poppins', sans-serif;
   background-color: #f0f7fb; /* very light cyan/teal */
   min-height: calc(100vh - 70px);
+=======
+/* Home.css */
+
+/* General container padding */
+.home-container {
+  padding: 40px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0fdfd; /* very light teal */
+  min-height: calc(100vh - 70px); /* full height minus navbar */
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
 }
 
+<<<<<<< HEAD
 /* =======================
    Home Card (Enhanced Design)
 ======================= */
@@ -113,12 +125,79 @@
   display: flex;
   justify-content: center;
   margin-top: 18px;
+=======
+/* Card style */
+.home-card {
+  background-color: #e0f7f5; /* light teal */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  padding: 30px;
+  max-width: 1000px; /* increased from 800px */
+  width: 100%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.home-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Headings */
+.home-card h2 {
+  color: #00796b; /* dark teal */
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+  text-align: center;
+}
+
+.home-card h5 {
+  color: #004d40; /* deeper teal */
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+/* Paragraph */
+.home-card p.small {
+  color: #004d40;
+  font-size: 1rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Buttons */
+.home-card button {
+  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
+  color: #fff;
+  padding: 12px 25px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-card button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.4);
+}
+
+/* Center button on smaller screens */
+.home-card > div {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 /* ========================
    Responsive Breakpoints
 ======================== */
 @media screen and (max-width: 1024px) {
+<<<<<<< HEAD
   .home-container { gap: 30px; padding: 30px 15px; }
   .home-card h2 { font-size: 1.6rem; }
   .home-card h5 { font-size: 1.1rem; }
@@ -139,4 +218,67 @@
   .home-card h2 { font-size: 1.3rem; }
   .home-card h5 { font-size: 0.95rem; }
   .home-card p.small { font-size: 0.85rem; }
+=======
+  .home-container {
+    gap: 30px;
+    padding: 30px 15px;
+  }
+
+  .home-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .home-card h5 {
+    font-size: 1.1rem;
+  }
+
+  .home-card p.small {
+    font-size: 0.95rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-card {
+    padding: 25px 20px;
+  }
+
+  .home-card h2 {
+    font-size: 1.4rem;
+  }
+
+  .home-card h5 {
+    font-size: 1rem;
+  }
+
+  .home-card p.small {
+    font-size: 0.9rem;
+  }
+
+  .home-card button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container {
+    padding: 20px 10px;
+    gap: 25px;
+  }
+
+  .home-card {
+    padding: 20px 15px;
+  }
+
+  .home-card h2 {
+    font-size: 1.3rem;
+  }
+
+  .home-card h5 {
+    font-size: 0.95rem;
+  }
+
+  .home-card p.small {
+    font-size: 0.85rem;
+  }
+>>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
