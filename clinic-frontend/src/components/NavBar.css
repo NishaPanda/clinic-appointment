@@ -1,0 +1,245 @@
+.profile-dropdown {
+  position: relative;
+}
+.profile-icon { cursor: pointer; padding: 6px 8px; border-radius: 6px; background: rgba(255,255,255,0.08); }
+.profile-icon:hover { background: rgba(255,255,255,0.12); }
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background: #fff;
+  color: #003a35;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  z-index: 2000;
+}
+
+.dropdown-menu button { background: transparent; border: none; padding: 8px 10px; text-align: left; cursor: pointer; width: 100%; }
+.dropdown-menu button:hover { background: rgba(0,0,0,0.04); }
+/* ===============================
+   Navbar Container
+================================ */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 50px;
+  background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+/* ===============================
+   Brand (Left)
+================================ */
+.navbar-brand {
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  gap: 5px;
+}
+
+.brand-health { color: #f1fffd; }   /* almost white for "Health" */
+.brand-hub { color: #bfb3eb; }      /* deep cyan for "Hub" */
+
+
+/* ===============================
+   Center Links
+================================ */
+.navbar-links {
+  display: flex;
+  gap: 60px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 6px 10px;
+  position: relative; /* for underline */
+  transition: color 0.3s ease;
+}
+
+/* Smooth animated underline */
+.navbar-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: #ffffff; /* underline color */
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.navbar-links a:hover::after,
+.navbar-links a.active::after {
+  width: 100%;
+}
+
+/* ===============================
+   Right-side Auth Links
+================================ */
+.navbar-auth {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-auth a {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.navbar-auth a:hover {
+  background-color: #ffffff;
+  color: #00bfa5;
+  border: 1px solid #ffffff;
+}
+
+/* Patients dropdown (doctor quick-access) */
+.patients-dropdown {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.patients-icon {
+  font-size: 18px;
+}
+
+.patients-badge {
+  background: #ff5a5f;
+  color: white;
+  border-radius: 12px;
+  padding: 2px 6px;
+  font-size: 12px;
+  margin-left: 6px;
+}
+
+.patients-menu {
+  position: absolute;
+  right: 0;
+  top: 36px;
+  width: 260px;
+  background: white;
+  border: 1px solid #e6e6e6;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  border-radius: 6px;
+  z-index: 2000;
+  padding: 8px;
+}
+
+.patients-header {
+  font-weight: 600;
+  padding: 6px 8px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.patient-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.patient-item:hover { background: #fafafa; }
+
+.patient-name { font-size: 14px; }
+.patient-time { font-size: 12px; color: #666; }
+
+.patients-footer { padding-top: 8px; text-align: center; }
+.patients-footer button { background: transparent; border: none; color: #0077ff; cursor: pointer; }
+
+/* ===============================
+   Hamburger Menu (Mobile)
+================================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.hamburger .line.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger .line.open:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger .line.open:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* ===============================
+   Responsive (Mobile <=768px)
+================================ */
+@media screen and (max-width: 768px) {
+  .navbar-links,
+  .navbar-auth {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #00bfa5;
+    padding: 20px;
+    display: none;
+  }
+
+  .navbar-links.active,
+  .navbar-auth.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .navbar-links a,
+  .navbar-auth a {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+/* ===============================
+   Body Padding for Fixed Navbar
+================================ */
+body {
+  padding-top: 70px; /* space so content not hidden behind navbar */
+}

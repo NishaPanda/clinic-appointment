@@ -1,0 +1,148 @@
+/* ==============================
+   Overall Container
+============================== */
+.doctor-container {
+  padding: 30px 20px 60px;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #f5f9fc 0%, #eaf4fb 100%);
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Page Heading */
+.doctor-container h2 {
+  color: #0456c1; /* dark blue from gradient */
+  font-size: 1.9rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 0.4px;
+  text-shadow: 0 1px 2px rgba(4, 86, 193, 0.15);
+}
+
+/* Doctor Card */
+.doctor-card {
+  background: linear-gradient(145deg, #ffffff, #f2f9fc);
+  border-radius: 14px;
+  border: 1px solid rgba(200, 220, 230, 0.7);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+  padding: 25px 30px;
+  max-width: 850px;
+  width: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Soft radial accent */
+.doctor-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle at top right, rgba(4, 86, 193, 0.08), transparent 70%);
+  z-index: 0;
+}
+
+.doctor-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Doctor Info Layout */
+.doctor-card .doctor-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left section (name + specialty) */
+.doctor-card .doctor-info div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.doctor-card .doctor-info .doctor-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #0456c1;
+  letter-spacing: 0.3px;
+}
+
+.doctor-card .doctor-info .doctor-specialty {
+  font-size: 0.95rem;
+  color: #1e99c3;
+  opacity: 0.9;
+}
+
+/* Book Appointment Button */
+.doctor-card button {
+  background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+  color: #fff;
+  padding: 10px 26px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(4, 86, 193, 0.3);
+}
+
+.doctor-card button:hover {
+  background: linear-gradient(90deg, #0348a1 0%, #1e99c3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(4, 86, 193, 0.35);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .doctor-card .doctor-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .doctor-card button {
+    width: 100%;
+    text-align: center;
+  }
+
+  .doctor-container h2 {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .doctor-container {
+    padding: 20px 10px 40px;
+    gap: 25px;
+  }
+
+  .doctor-card {
+    padding: 20px 18px;
+  }
+
+  .doctor-card .doctor-info .doctor-name {
+    font-size: 1rem;
+  }
+
+  .doctor-card .doctor-info .doctor-specialty {
+    font-size: 0.85rem;
+  }
+}

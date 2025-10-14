@@ -1,0 +1,122 @@
+/* Register.css - Blue-Cyan Theme with Animations */
+
+/* Container with fade-in */
+.register-container {
+  width: 400px;
+  max-width: 90%;
+  margin: 10px auto;
+  padding: 30px;
+  background: linear-gradient(145deg, #ffffff, #eaf6fc); /* soft white → light cyan */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(4, 86, 193, 0.15);
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  opacity: 0;
+  animation: fadeIn 0.8s forwards;
+  color: #004d52;
+}
+
+/* Fade-in keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Heading */
+.register-container h2 {
+  margin-bottom: 25px;
+  color: #0456c1; /* deep blue */
+}
+
+/* Form */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Labels and inputs */
+.register-form label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+  color: #004d52; /* deep blue/teal */
+}
+
+.register-form input,
+.register-form select {
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #26c6da; /* light cyan border */
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form input:focus,
+.register-form select:focus {
+  border-color: #0456c1;
+  box-shadow: 0 0 8px rgba(4, 86, 193, 0.2);
+}
+
+/* Button */
+.register-form button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+  color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.register-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(4, 86, 193, 0.4);
+  background: linear-gradient(90deg, #0261a9 0%, #33cde0 100%);
+}
+
+/* Error message */
+.register-error {
+  color: #d32f2f;
+  font-weight: 500;
+  margin-top: -5px;
+}
+
+/* Login link */
+.register-link {
+  color: #0456c1;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.register-link:hover {
+  color: #26c6da;
+}
+
+/* Row for Age and Gender */
+.register-row {
+  display: flex;
+  gap: 15px;
+}
+
+.register-row label {
+  flex: 1;
+}
+
+/* Responsive */
+@media screen and (max-width: 480px) {
+  .register-container {
+    padding: 20px;
+  }
+
+  .register-row {
+    flex-direction: column;
+  }
+}

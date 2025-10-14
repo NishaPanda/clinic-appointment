@@ -1,0 +1,142 @@
+/* General container padding */
+.home-container {
+  padding: 50px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f0f7fb; /* very light cyan/teal */
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* =======================
+   Home Card (Enhanced Design)
+======================= */
+.home-card {
+  background: linear-gradient(145deg, #ffffff, #f2f9fc);
+  border-radius: 16px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 40px 35px;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid rgba(200, 220, 230, 0.5);
+  backdrop-filter: blur(4px);
+  transition: all 0.4s ease;
+  transform: translateY(0);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle gradient overlay */
+.home-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at top right, rgba(4, 86, 193, 0.08), transparent 60%);
+  z-index: 0;
+  transition: opacity 0.4s ease;
+}
+
+.home-card:hover::before {
+  opacity: 0.25;
+}
+
+/* card hover effect */
+.home-card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* content layering */
+.home-card * {
+  position: relative;
+  z-index: 1;
+}
+
+/* headings */
+.home-card h2 {
+  color: #0456c1; /* dark blue from gradient */
+  margin-bottom: 18px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.home-card h5 {
+  color: #026caa; /* lighter blue */
+  margin: 10px 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* paragraph text */
+.home-card p.small {
+  color: #4a6370;
+  font-size: 1rem;
+  line-height: 1.7;
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto;
+  opacity: 0.95;
+}
+
+/* buttons */
+.home-card button {
+  background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
+  color: #fff;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(4, 86, 193, 0.3);
+  transition: all 0.3s ease;
+}
+
+.home-card button:hover {
+  background: linear-gradient(90deg, #0348a1 0%, #1e99c3 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(4, 86, 193, 0.35);
+}
+
+/* button wrapper */
+.home-card > div {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+/* ========================
+   Responsive Breakpoints
+======================== */
+@media screen and (max-width: 1024px) {
+  .home-container { gap: 30px; padding: 30px 15px; }
+  .home-card h2 { font-size: 1.6rem; }
+  .home-card h5 { font-size: 1.1rem; }
+  .home-card p.small { font-size: 0.95rem; }
+}
+
+@media screen and (max-width: 768px) {
+  .home-card { padding: 25px 20px; }
+  .home-card h2 { font-size: 1.4rem; }
+  .home-card h5 { font-size: 1rem; }
+  .home-card p.small { font-size: 0.9rem; }
+  .home-card button { width: 100%; }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container { padding: 20px 10px; gap: 25px; }
+  .home-card { padding: 20px 15px; }
+  .home-card h2 { font-size: 1.3rem; }
+  .home-card h5 { font-size: 0.95rem; }
+  .home-card p.small { font-size: 0.85rem; }
+}
