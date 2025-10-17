@@ -3,11 +3,7 @@ import { fetchDoctorAppointments } from '../api';
 import dayjs from 'dayjs';
 
 export default function DoctorProfile() {
-  const storedUser = JSON.parse(localStorage.getItem('user')) || {};
-  const [name, setName] = useState(storedUser.name || '');
-  const [email, setEmail] = useState(storedUser.email || '');
-  const [editing, setEditing] = useState(false);
-  const [message, setMessage] = useState('');
+  const user = JSON.parse(localStorage.getItem('user')) || {};
   const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
@@ -15,15 +11,6 @@ export default function DoctorProfile() {
       .then(setAppointments)
       .catch(err => console.error(err));
   }, []);
-
-  const handleUpdate = () => {
-    const updatedUser = { ...storedUser, name, email };
-    localStorage.setItem('user', JSON.stringify(updatedUser));
-    window.dispatchEvent(new Event('user-profile-updated'));
-    setMessage('Profile updated successfully!');
-    setEditing(false);
-    setTimeout(() => setMessage(''), 2000);
-  };
 
   return (
     <div>
@@ -150,52 +137,18 @@ export default function DoctorProfile() {
 
         <div className="profile-field">
           <strong>Name:</strong>
-          {editing ? (
-            <span className="profile-input">
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                autoFocus
-              />
-            </span>
-          ) : (
-            <span className="profile-value">{name || '—'}</span>
-          )}
+          <span className="profile-value">{user.name || '—'}</span>
         </div>
 
         <div className="profile-field">
           <strong>Email:</strong>
-          {editing ? (
-            <span className="profile-input">
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </span>
-          ) : (
-            <span className="profile-value">{email || '—'}</span>
-          )}
+          <span className="profile-value">{user.email || '—'}</span>
         </div>
 
         <div className="profile-field">
           <strong>Role:</strong>
-          <span className="profile-value">{storedUser.role || 'Doctor'}</span>
+          <span className="profile-value">{user.role || 'Doctor'}</span>
         </div>
-
-        <div className="profile-actions" style={{ textAlign: 'center', marginTop: 20 }}>
-          {editing ? (
-            <>
-              <button onClick={handleUpdate}>Update</button>
-              <button onClick={() => { setEditing(false); setName(storedUser.name || ''); setEmail(storedUser.email || ''); }}>Cancel</button>
-            </>
-          ) : (
-            <button onClick={() => setEditing(true)}>Edit</button>
-          )}
-        </div>
-
-        <div className="profile-message" style={{ textAlign: 'center', color: '#26c6da', marginTop: 18, fontSize: '1rem', minHeight: 24 }}>{message}</div>
 
         <h3>My Appointments</h3>
         {appointments.length === 0 ? (

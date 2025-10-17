@@ -20,30 +20,28 @@ export default function NavBar() {
 
     checkUser(); // Initial check
     window.addEventListener("storage", checkUser);
-<<<<<<< HEAD
     window.addEventListener("focus", checkUser);
     window.addEventListener("user-profile-updated", checkUser);
+
     return () => {
       window.removeEventListener("storage", checkUser);
       window.removeEventListener("focus", checkUser);
       window.removeEventListener("user-profile-updated", checkUser);
     };
-=======
-    return () => window.removeEventListener("storage", checkUser);
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   }, []);
 
-  // If logged in as doctor, fetch upcoming appointments for quick access
+  // ✅ If logged in as doctor, fetch upcoming appointments for quick access
   useEffect(() => {
     let mounted = true;
     const userObj = user || (localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null);
     const isDoctor = userObj && userObj.role && String(userObj.role).toLowerCase() === 'doctor';
+
     if (isDoctor) {
       fetchDoctorAppointments()
         .then(list => {
           if (!mounted) return;
-          // pick next 5 upcoming
-          setNextAppointments((list || []).slice(0,5));
+          // Pick next 5 upcoming
+          setNextAppointments((list || []).slice(0, 5));
         })
         .catch(err => console.error('Failed to load doctor appointments', err));
     } else {
@@ -52,7 +50,7 @@ export default function NavBar() {
     return () => { mounted = false; };
   }, [user]);
 
-  // Close dropdown when clicking outside
+  // ✅ Close dropdown when clicking outside
   useEffect(() => {
     const onDocClick = (e) => {
       if (!e.target.closest('.profile-dropdown')) setDropdownOpen(false);
@@ -91,19 +89,19 @@ export default function NavBar() {
 
       {/* Center - Main Links */}
       <div className={`navbar-links ${isOpen ? "active" : ""}`}>
-        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}> 
+        <NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>
           Home
         </NavLink>
         {user && user.role && String(user.role).toLowerCase() === 'doctor' ? (
-          <NavLink to="/profile" className={({ isActive }) => (isActive ? "active" : "")}> 
+          <NavLink to="/profile" className={({ isActive }) => (isActive ? "active" : "")}>
             My Patients
           </NavLink>
         ) : (
-          <NavLink to="/doctors" className={({ isActive }) => (isActive ? "active" : "")}> 
+          <NavLink to="/doctors" className={({ isActive }) => (isActive ? "active" : "")}>
             Doctors
           </NavLink>
         )}
-        <NavLink to="/appointments" className={({ isActive }) => (isActive ? "active" : "")}> 
+        <NavLink to="/appointments" className={({ isActive }) => (isActive ? "active" : "")}>
           My Appointments
         </NavLink>
       </div>
@@ -120,13 +118,13 @@ export default function NavBar() {
             </NavLink>
           </>
         ) : (
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer' }}>
             {user?.role === 'doctor' && (
               <div className="patients-dropdown" onClick={(e) => { e.stopPropagation(); setPatientsOpen(!patientsOpen); }}>
                 <div className="patients-icon" style={{ cursor: 'pointer' }}>👥</div>
                 <div className="patients-badge">{nextAppointments.length}</div>
                 {patientsOpen && (
-                  <div className="patients-menu" style={{color: "black"}}>
+                  <div className="patients-menu" style={{ color: "black" }}>
                     <div className="patients-header">Upcoming Patients</div>
                     {nextAppointments.length === 0 ? (
                       <div className="patient-item">No upcoming appointments</div>
@@ -138,7 +136,9 @@ export default function NavBar() {
                         </div>
                       ))
                     )}
-                    <div className="patients-footer"><button onClick={() => { navigate('/profile'); setPatientsOpen(false); }}>View all</button></div>
+                    <div className="patients-footer">
+                      <button onClick={() => { navigate('/profile'); setPatientsOpen(false); }}>View all</button>
+                    </div>
                   </div>
                 )}
               </div>
@@ -146,11 +146,7 @@ export default function NavBar() {
 
             <div className="profile-dropdown">
               <div className="profile-icon" onClick={() => setDropdownOpen(!dropdownOpen)}>
-<<<<<<< HEAD
                 👤 {user && user.name ? user.name.split(" ")[0] : "User"}
-=======
-                👤 {user.name ? user.name.split(" ")[0] : "User"}
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
               </div>
               {dropdownOpen && (
                 <div className="dropdown-menu">

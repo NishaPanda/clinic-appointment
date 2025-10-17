@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-
 import React, { useState } from 'react';
-
 
 export default function PatientProfile() {
   const storedUser = JSON.parse(localStorage.getItem('user')) || {};
@@ -101,14 +98,12 @@ export default function PatientProfile() {
         <div className="profile-field">
           <strong>Name:</strong>
           {editing ? (
-            <span className="profile-input">
-              <input
-                type="text"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                autoFocus
-              />
-            </span>
+            <input
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              autoFocus
+            />
           ) : (
             <span className="profile-value">{name || '—'}</span>
           )}
@@ -117,13 +112,11 @@ export default function PatientProfile() {
         <div className="profile-field">
           <strong>Email:</strong>
           {editing ? (
-            <span className="profile-input">
-              <input
-                type="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-              />
-            </span>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
           ) : (
             <span className="profile-value">{email || '—'}</span>
           )}
@@ -138,29 +131,24 @@ export default function PatientProfile() {
           {editing ? (
             <>
               <button onClick={handleUpdate}>Update</button>
-              <button onClick={() => { setEditing(false); setName(storedUser.name || ''); setEmail(storedUser.email || ''); }}>Cancel</button>
+              <button onClick={() => { 
+                setEditing(false); 
+                setName(storedUser.name || ''); 
+                setEmail(storedUser.email || ''); 
+              }}>Cancel</button>
             </>
           ) : (
             <button onClick={() => setEditing(true)}>Edit</button>
           )}
         </div>
 
-        <div className="profile-message" style={{ textAlign: 'center', color: '#26c6da', marginTop: 18, fontSize: '1rem', minHeight: 24 }}>{message}</div>
+        <div 
+          className="profile-message" 
+          style={{ textAlign: 'center', color: '#26c6da', marginTop: 18, fontSize: '1rem', minHeight: 24 }}
+        >
+          {message}
+        </div>
       </div>
-=======
-import React from 'react';
-
-export default function PatientProfile() {
-  const user = JSON.parse(localStorage.getItem('user')) || {};
-
-  return (
-    <div style={{ maxWidth: 800, margin: '20px auto' }}>
-      <h2>Patient Profile</h2>
-      <div><strong>Name:</strong> {user.name || '—'}</div>
-      <div><strong>Email:</strong> {user.email || '—'}</div>
-      <div><strong>Role:</strong> {user.role || 'patient'}</div>
-      <p style={{ marginTop: 12 }}>You can update profile details in future iterations.</p>
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
     </div>
   );
 }

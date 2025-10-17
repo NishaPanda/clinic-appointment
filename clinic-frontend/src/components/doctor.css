@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* ==============================
    Overall Container
 ============================== */
@@ -49,58 +48,18 @@
   height: 120px;
   background: radial-gradient(circle at top right, rgba(4, 86, 193, 0.08), transparent 70%);
   z-index: 0;
-=======
-/* DoctorList.css */
-
-/* Container */
-.doctor-container {
-  padding: 40px 20px;
-  font-family: 'Poppins', sans-serif;
-  background-color: #f0fdfd; /* very light teal */
-  min-height: calc(100vh - 70px); /* minus navbar height */
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-}
-
-/* Page heading */
-.doctor-container h2 {
-  color: #00796b; /* dark teal */
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-/* Card for each doctor */
-.doctor-card {
-  background-color: #e0f7f5; /* light teal */
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  padding: 20px 25px;
-  width: 100%;
-  max-width: 900px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 }
 
 .doctor-card:hover {
   transform: translateY(-5px);
-<<<<<<< HEAD
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Doctor Info Layout */
-=======
-  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* Doctor info */
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 .doctor-card .doctor-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-<<<<<<< HEAD
   position: relative;
   z-index: 1;
 }
@@ -130,37 +89,11 @@
   background: linear-gradient(90deg, #0456c1 0%, #26c6da 100%);
   color: #fff;
   padding: 10px 26px;
-=======
-}
-
-.doctor-card .doctor-info div:first-child {
-  display: flex;
-  flex-direction: column;
-}
-
-.doctor-card .doctor-info div:first-child .doctor-name {
-  font-weight: 600;
-  font-size: 1.1rem;
-  color: #004d40;
-}
-
-.doctor-card .doctor-info div:first-child .doctor-specialty {
-  font-size: 0.9rem;
-  color: #00695c;
-}
-
-/* Book button */
-.doctor-card button {
-  background: linear-gradient(90deg, #00bfa5 0%, #48c9c7 100%);
-  color: #fff;
-  padding: 10px 22px;
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   font-size: 14px;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-<<<<<<< HEAD
   transition: all 0.25s ease;
   box-shadow: 0 4px 12px rgba(4, 86, 193, 0.3);
 }
@@ -178,58 +111,31 @@
 }
 
 /* Responsive Design */
-=======
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.doctor-card button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 191, 165, 0.4);
-}
-
-/* Responsive adjustments */
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
 @media screen and (max-width: 768px) {
   .doctor-card .doctor-info {
     flex-direction: column;
     align-items: flex-start;
-<<<<<<< HEAD
     gap: 12px;
-=======
-    gap: 10px;
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   }
 
   .doctor-card button {
     width: 100%;
-<<<<<<< HEAD
     text-align: center;
   }
 
   .doctor-container h2 {
     font-size: 1.6rem;
-=======
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   }
 }
 
 @media screen and (max-width: 480px) {
   .doctor-container {
-<<<<<<< HEAD
     padding: 20px 10px 40px;
     gap: 25px;
   }
 
   .doctor-card {
     padding: 20px 18px;
-=======
-    padding: 20px 10px;
-    gap: 20px;
-  }
-
-  .doctor-card {
-    padding: 15px 20px;
->>>>>>> dbb21b57f0b5b611e11e76d7ad1a3861bde1e36b
   }
 
   .doctor-card .doctor-info .doctor-name {
